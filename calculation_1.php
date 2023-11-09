@@ -1,20 +1,43 @@
 <?php
 include 'inc.php';
+$id = $_GET['id'];
+$sql0 = "SELECT * FROM test where id = '$id' ";
+$result0t = $conn->query($sql0);
+if ($result0t->num_rows > 0) {
+    while ($row0 = $result0t->fetch_assoc()) {
+        $title = $row0["title"];
+        $descrip = $row0["descrip"];
+        $module = $row0["module"];
+        $level = $row0["level"];
 
-$operator = 2; // 1 = addition, 2 = subtraction, 3 = multiplication, 4 = division
-$negative = 0; // this function is not used yet.
-$valuestart = 0;
-$valueend = 20;
-$maxfirst = 0; // 0 = first value is max or min, 1 = first val is max;
+        $operator = $row0["operator"];
+        ; // 1 = addition, 2 = subtraction, 3 = multiplication, 4 = division
+        $negative = $row0["negative"];
+        ; // this function is not used yet.
+        $valuestart = $row0["startvalue"];
+        ;
+        $valueend = $row0["endvalue"];
+        ;
+        $maxfirst = $row0["maxfirst"];
+        ; // 0 = first value is max or min, 1 = first val is max;
 
-$numcnt = 2; // how much number will be opperand.
-$disp = 1; // display number at a time or countinue ; 1 = at a time, 0 = continue series
-$quecnt = 10; // total question/quiz in a text
-$dur = 2000; // max duration to submit an answer
+        $numcnt = $row0["numcount"];
+        ; // how much number will be opperand.
+        $disp = $row0["display"];
+        ; // display number at a time or countinue ; 1 = at a time, 0 = continue series
+        $quecnt = $row0["questions"];
+        ; // total question/quiz in a text
+        $dur = $row0["duration"];
+        ; // max duration to submit an answer
+    }
+}
+
 
 ///////////////////////////////////////
 
 ?>
+
+
 <style>
     .box {
         padding: 10px 25px;
@@ -62,16 +85,103 @@ $dur = 2000; // max duration to submit an answer
         height: 50px;
         width: 50px;
     }
+
+    .top-text-descrip {
+        font-size: 11px;
+        display: block;
+        margin: 0;
+        color: gray;
+        text-transform: none;
+        font-style: italic;
+        letter-spacing: normal;
+        font-weight: 400;
+    }
+
+    .opening-block {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 <body style="background: var(--lighter); width:100%; max-width:100%; overflow:auto;">
-    <div class="containerx" style="width: 100%">
-        <div style="text-align: center; margin: 25px 0;">
+    <div class="containerx" style="width: 100%;">
+
+
+        <div id="opening-block" class="opening-block" style="text-align: center; margin: 5px 0; ">
+
             <div class="top-icon"><i class="bi bi-plus-circle-fill"></i></div>
             <div class="top-text">
-                addition
-                <span class="top-text-level">Level 5</span>
+                <?php echo $title; ?>
+                <span class="top-text-descrip">
+                    <?php echo $descrip; ?>
+                </span>
+                <span class="top-text-level">
+                    <?php echo $level; ?>
+                </span>
             </div>
+
+            <style>
+                .rules {
+                    text-align: left;
+                    font-size: 12px;
+                }
+                .ss {
+                    text-align: center; 
+                    position : relative;
+                }
+                .ss-img {
+                    width: 70%; margin: 0 auto; border: 1px solid gray;
+                    border-radius: 4px;
+                }
+                .play {
+                    position : absolute;
+                    right: 20%;
+                    top: 5%;
+                    font-size: 30px;
+                    color: white; 
+                }
+            </style>
+            <div class="rules">
+                <ul>
+                    <li>This test contain 5 calculations between 2 numbers.</li>
+                    <li>Your task is adding them, those are between 0 and 10</li>
+                    <li>30 Sec(s) will remaining to calculate every expression.</li>
+                </ul>
+                <div class="ss">
+                    <div onclick="playyoutube();" class="btn-success play"><i class="bi bi-play-btn-fill"></i></div>
+                    <img src="screenshot/<?php echo $module . '_' . $level; ?>.png"
+                                class="ss-img" />
+                </div>
+            </div>
+
+            <div style="padding:25px 0 50px;">
+                <button class="btn btn-success pp" onclick="testagain();"><i
+                        class="bi bi-caret-right-fill"></i></button>
+                <button class="btn btn-info pp" onclick="leaderboard();"><i class="bi bi-award"></i></button>
+                <button class="btn btn-warning pp" onclick="history();"><i class="bi bi-smartwatch"></i></button>
+                <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
+            </div>
+        </div>
+
+
+        <div id="main-block" style="text-align: center; margin: 25px 0; display:none;">
+            <div class="top-icon"><i class="bi bi-plus-circle-fill"></i></div>
+            <div class="top-text">
+                <?php echo $title; ?>
+                <span class="top-text-descrip">
+                    <?php echo $descrip; ?>
+                </span>
+                <span class="top-text-level">
+                    <?php echo $level; ?>
+                </span>
+            </div>
+
+
+
 
             <!-- Box Icon -->
             <div class="box" style="display: none;">
@@ -143,13 +253,13 @@ $dur = 2000; // max duration to submit an answer
                     text-align: center;
                     justify-content: center;
                     align-items: center;
-                    margin : 15px auto;
+                    margin: 15px auto;
                 }
 
                 .dot {
-                    height: 12px;
-                    width: 12px;
-                    margin: 3px;
+                    height: 10px;
+                    width: 10px;
+                    margin: 2px;
                     border-radius: 50%;
                     background: var(--light);
                 }
@@ -165,7 +275,7 @@ $dur = 2000; // max duration to submit an answer
                 .secs {
                     text-align: center;
                     font-size: 15px;
-                    letter-spacing: 3px;
+                    letter-spacing: 2px;
                     ;
                 }
             </style>
@@ -231,9 +341,13 @@ $dur = 2000; // max duration to submit an answer
             <div class="result">
                 <input type="number" id="res" class="result-value" onkeyup="submit();" />
             </div>
+
+            <div style="padding:25px 0 50px;">
+                <button class="btn btn-danger" onclick="repeal();">Repeal</button>
+            </div>
         </div>
     </div>
-    <div id="repo">
+    <div id="repo" style="display:none;">
 
     </div>
 
@@ -345,17 +459,27 @@ $dur = 2000; // max duration to submit an answer
                         }
 
                         #board {
-                            font-size:10px;
+                            font-size: 10px;
                             color: var(--darker);
                         }
+
                         #board span {
-                            font-size: 14px; font-weight:600;
+                            font-size: 14px;
+                            font-weight: 600;
                         }
-                        #board .bi{
+
+                        #board .bi {
                             font-size: 30px;
                         }
+
                         .big {
                             font-size: 60px;
+                        }
+
+                        .pp {
+                            padding: 10px;
+                            font-size: 24px;
+                            margin: 0 10px;
                         }
                     </style>
                     <div style="display:block;">
@@ -378,8 +502,13 @@ $dur = 2000; // max duration to submit an answer
                                             <br><span>00:00:17</span><br>Your Best
                                         </div>
                                         <div style="text-align:center;">
-                                        <i class="bi bi-award " style=" font-size:60px;"></i>
-                                        <br><span>108</span><br>Rank
+                                            <i class="bi bi-award " style=" font-size:60px;"></i><br>Rank
+                                            <div
+                                                style="position:relative; text-align: center; top: -61px; font-size:15px;">
+                                                738
+                                            </div>
+
+
                                         </div>
                                         <div style="text-align:right;">
                                             <i class="bi bi-stopwatch-fill"></i>
@@ -388,9 +517,7 @@ $dur = 2000; // max duration to submit an answer
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="3" style="height:25px;"></td>
-                            </tr>
+
                             <tr>
 
                                 <td colspan="3">
@@ -419,9 +546,11 @@ $dur = 2000; // max duration to submit an answer
             </div>
 
             <div style="padding:25px 0 50px;">
-                <button class="btn btn-info" onclick="testagain();">Try Again</button>
-                <button class="btn btn-success" onclick="leaderboard();">Leaderboard</button>
-                <button class="btn btn-danger" onclick="close();">Close</button>
+                <button class="btn btn-success pp" onclick="testagain();"><i
+                        class="bi bi-caret-right-fill"></i></button>
+                <button class="btn btn-info pp" onclick="leaderboard();"><i class="bi bi-award"></i></button>
+                <button class="btn btn-warning pp" onclick="history();"><i class="bi bi-smartwatch"></i></button>
+                <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
             </div>
 
         </div>
@@ -430,9 +559,13 @@ $dur = 2000; // max duration to submit an answer
     </div>
 
 
+
+
     <script>
         var myVar;
         var mydur;
+
+
 
         function testagain() {
             document.getElementById("sec").innerHTML = 0;
@@ -457,13 +590,15 @@ $dur = 2000; // max duration to submit an answer
                 myVar = setInterval(myTimer, 1000);
                 mydur = setInterval(mydurTimer, 100);
             }
+            document.getElementById("opening-block").style.display = 'none';
+            document.getElementById("main-block").style.display = 'block';
         }
 
         function addcalc() {
             var min = <?php echo $valuestart; ?>;
-            var max = <?php echo $valueend; ?>+1;
-            var val1 = Math.floor(Math.random() * (max - min) ) + min;
-            var val2 = Math.floor(Math.random() * (max - min) ) + min;
+            var max = <?php echo $valueend; ?> + 1;
+            var val1 = Math.floor(Math.random() * (max - min)) + min;
+            var val2 = Math.floor(Math.random() * (max - min)) + min;
             if (<?php echo $maxfirst; ?> == 1) {
                 if (val1 > val2) {
                     document.getElementById("val1").innerHTML = val1;
@@ -522,7 +657,7 @@ $dur = 2000; // max duration to submit an answer
                     addcalc();
                 } else {
                     document.getElementById("done-icon").innerHTML = '<i class="bi bi-check2-circle"></i>';
-                    document.getElementById("done-msg").innerHTML = "you're all done";
+                    document.getElementById("done-msg").innerHTML = "You're all done";
                     done();
                 }
             }
@@ -569,7 +704,11 @@ $dur = 2000; // max duration to submit an answer
         }
         // }
 
-
+        function repeal() {
+            document.getElementById("done-icon").innerHTML = '<i style="color:red;" class="bi bi-x-circle-fill"></i>';
+            document.getElementById("done-msg").innerHTML = "You've repeal this test.";
+            done();
+        }
         function done() {
             clearInterval(myVar);
             clearInterval(mydur);
@@ -580,6 +719,23 @@ $dur = 2000; // max duration to submit an answer
             var z = document.getElementById("secc").innerHTML;
             document.getElementById("seccx").innerHTML = z;
             document.getElementById("layerblock").style.display = 'flex';
+        }
+
+
+        function leaderboard() {
+
+        }
+
+        function history() {
+
+        }
+
+        function closet() {
+            document.getElementById("layerblock").style.display = 'none';
+            document.getElementById("main-block").style.display = 'none';
+            document.getElementById("opening-block").style.display = 'flex';
+            clearInterval(myVar);
+            clearInterval(mydur);
         }
 
         function jog(n1, n2) {
@@ -598,5 +754,10 @@ $dur = 2000; // max duration to submit an answer
             return n1 % n2;
         }
 
+
+        // myVar = setInterval(myTimer, 1000);
+        // mydur = setInterval(mydurTimer, 100);
+        clearInterval(myVar);
+        clearInterval(mydur);
         addcalc();
     </script>

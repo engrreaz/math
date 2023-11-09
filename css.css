@@ -400,6 +400,9 @@ input[type=checkbox]:checked {
   padding-left: 30px;
   font-style: italic;
 }
+.box-text {
+  justify-content: stretch;
+}
 
 .icon {
   padding-right: 5px;
@@ -444,3 +447,7 @@ td {
   font-size: 12px; display: block; text-align: center; letter-spacing:normal;
 }
 
+.box-titlebn {
+  font-size: 11px;
+  font-weight:400
+}
