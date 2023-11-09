@@ -22,7 +22,7 @@
         </div>
 
 
-
+<a href="module.php?email=engrreaz@gmail.com" class="btn">Puzzle</a>
 
 
     </div>

@@ -81,8 +81,7 @@ $module = $_GET['module'];
 
     <script>
         function opent(link, id) {
-            alert(link + id);
-            var lnk = link + "?id=" + id;
+             var lnk = link + "?id=" + id;
             window.location.href = lnk;
         }
     </script>
