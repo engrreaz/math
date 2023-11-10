@@ -129,20 +129,25 @@ if ($result0t->num_rows > 0) {
                     text-align: left;
                     font-size: 12px;
                 }
+
                 .ss {
-                    text-align: center; 
-                    position : relative;
+                    text-align: center;
+                    position: relative;
                 }
+
                 .ss-img {
-                    width: 70%; margin: 0 auto; border: 1px solid gray;
+                    width: 70%;
+                    margin: 0 auto;
+                    border: 1px solid gray;
                     border-radius: 4px;
                 }
+
                 .play {
-                    position : absolute;
+                    position: absolute;
                     right: 20%;
                     top: 5%;
                     font-size: 30px;
-                    color: white; 
+                    color: white;
                 }
             </style>
             <div class="rules">
@@ -153,8 +158,7 @@ if ($result0t->num_rows > 0) {
                 </ul>
                 <div class="ss">
                     <div onclick="playyoutube();" class="btn-success play"><i class="bi bi-play-btn-fill"></i></div>
-                    <img src="screenshot/<?php echo $module . '_' . $level; ?>.png"
-                                class="ss-img" />
+                    <img src="screenshot/<?php echo $module . '_' . $level; ?>.png" class="ss-img" />
                 </div>
             </div>
 
@@ -383,7 +387,7 @@ if ($result0t->num_rows > 0) {
         }
 
         .val {
-            text-align: left;
+            text-align: center;
         }
 
         #done-icon {
@@ -481,14 +485,19 @@ if ($result0t->num_rows > 0) {
                             font-size: 24px;
                             margin: 0 10px;
                         }
+
+                        .smm {
+                            font-size: 10px;
+                            font-style: italic;
+                        }
                     </style>
                     <div style="display:block;">
                         <table style="border:0px solid gray; ">
                             <tr>
-                                <td class="rt">Time</td>
-                                <td class="cln">:</td>
-                                <td class="val">
-                                    <div id="seccx" style="">0</div>
+                                <td colspan="3" class="val">
+                                    <div id="seccx" style="font-size: 18px; color: var(--dark); font-weight: 700;">0
+                                    </div>
+                                    <small class="smm">Time Taken</small>
                                 </td>
                             </tr>
                             <tr>
@@ -499,20 +508,18 @@ if ($result0t->num_rows > 0) {
                                     <div style="display:flex; justify-content: space-evenly; align-items: center;">
                                         <div style="text-align:left;">
                                             <i class="bi bi-stopwatch"></i>
-                                            <br><span>00:00:17</span><br>Your Best
+                                            <br><span id="best">00:00:17</span><br>Your Best
                                         </div>
                                         <div style="text-align:center;">
                                             <i class="bi bi-award " style=" font-size:60px;"></i><br>Rank
-                                            <div
+                                            <div id="rank"
                                                 style="position:relative; text-align: center; top: -61px; font-size:15px;">
                                                 738
                                             </div>
-
-
                                         </div>
                                         <div style="text-align:right;">
                                             <i class="bi bi-stopwatch-fill"></i>
-                                            <br><span>00:00:17</span><br>Champion
+                                            <br><span id="champ">00:00:17</span><br>Champion
                                         </div>
                                     </div>
                                 </td>
@@ -555,6 +562,12 @@ if ($result0t->num_rows > 0) {
 
         </div>
 
+        <div id="score" style="display:block;">
+            <div id="best2"></div>
+            <div id="rank2"></div>
+            <div id="champ2"></div>
+        </div>
+
 
     </div>
 
@@ -564,7 +577,7 @@ if ($result0t->num_rows > 0) {
     <script>
         var myVar;
         var mydur;
-
+        var gamedone = 0;
 
 
         function testagain() {
@@ -593,7 +606,8 @@ if ($result0t->num_rows > 0) {
             document.getElementById("opening-block").style.display = 'none';
             document.getElementById("main-block").style.display = 'block';
         }
-
+    </script>
+    <script>
         function addcalc() {
             var min = <?php echo $valuestart; ?>;
             var max = <?php echo $valueend; ?> + 1;
@@ -636,7 +650,8 @@ if ($result0t->num_rows > 0) {
             document.getElementById("res").focus();
             redur();
         }
-
+    </script>
+    <script>
         function submit() {
             var digit = parseInt(document.getElementById("digit").innerHTML);
             var subres = document.getElementById("res").value;
@@ -658,11 +673,13 @@ if ($result0t->num_rows > 0) {
                 } else {
                     document.getElementById("done-icon").innerHTML = '<i class="bi bi-check2-circle"></i>';
                     document.getElementById("done-msg").innerHTML = "You're all done";
+                    gamedone = 1;
                     done();
                 }
             }
         }
-
+    </script>
+    <script>
 
         mydur = setInterval(mydurTimer, 100);
         function mydurTimer() {
@@ -678,16 +695,19 @@ if ($result0t->num_rows > 0) {
             if ((ppp <= 0 || dursec <= 0.0) && <?php echo $dur; ?> > 0) {
                 document.getElementById("done-icon").innerHTML = '<i class="bi bi-stopwatch"></i>';
                 document.getElementById("done-msg").innerHTML = "Oppps! Time up";
+                gamedone = 3;
                 done();
             }
             // document.getElementById("secdur").innerHTML = dursec - 1;
         }
-
+    </script>
+    <script>
         function redur() {
             document.getElementById("secdur").innerHTML = "<?php echo $dur . '.0'; ?>";
         }
+    </script>
+    <script>
 
-        // function one() {
         myVar = setInterval(myTimer, 1000);
         function myTimer() {
             var secs = parseInt(document.getElementById("sec").innerHTML) * 1 + 1;
@@ -702,13 +722,19 @@ if ($result0t->num_rows > 0) {
 
             document.getElementById("secc").innerHTML = h + ':' + m + ':' + s;
         }
-        // }
+    </script>
+    <script>
 
         function repeal() {
+
             document.getElementById("done-icon").innerHTML = '<i style="color:red;" class="bi bi-x-circle-fill"></i>';
             document.getElementById("done-msg").innerHTML = "You've repeal this test.";
+            gemedone = 2;
+
             done();
         }
+    </script>
+    <script>
         function done() {
             clearInterval(myVar);
             clearInterval(mydur);
@@ -719,8 +745,46 @@ if ($result0t->num_rows > 0) {
             var z = document.getElementById("secc").innerHTML;
             document.getElementById("seccx").innerHTML = z;
             document.getElementById("layerblock").style.display = 'flex';
-        }
 
+            // fetch record ....
+
+            let id = <?php echo $id; ?>;
+            var dur = parseInt(document.getElementById("sec").innerHTML);
+            var ques = <?php echo $quecnt; ?>;
+            var corr = parseInt(document.getElementById("yyy").innerHTML);
+            var wrong = parseInt(document.getElementById("nnn").innerHTML);
+            var ans = corr + wrong;;
+
+
+            var infor = "id=" + id + "&dur=" + dur + "&que=" + ques + "&ans=" + ans + "&corr=" + corr + "&wrong=" + wrong + "&gamedone=" + gamedone;
+            $("#score").html("");
+
+            $.ajax({
+                type: "POST",
+                url: "fetchscore.php",
+                data: infor,
+                cache: false,
+                beforeSend: function () {
+                    $('#score').html('<span class="">Saving, Please Wait....</span>');
+                },
+                success: function (html) {
+                    $("#score").html(html);
+                    var best = parseInt(document.getElementById("best2").innerHTML);
+                    var champ = parseInt(document.getElementById("champ2").innerHTML);
+                    var rank = parseInt(document.getElementById("rank2").innerHTML);
+                    document.getElementById("best").innerHTML = numtotime(best);
+                    document.getElementById("champ").innerHTML = numtotime(champ);
+                    if (isNaN(rank)) {
+                        document.getElementById("rank").innerHTML = '-';
+                    } else {
+                        document.getElementById("rank").innerHTML = rank ;
+                    }
+                    $("#score").html("");
+                }
+            });
+        }
+    </script>
+    <script>
 
         function leaderboard() {
 
@@ -729,7 +793,8 @@ if ($result0t->num_rows > 0) {
         function history() {
 
         }
-
+    </script>
+    <script>
         function closet() {
             document.getElementById("layerblock").style.display = 'none';
             document.getElementById("main-block").style.display = 'none';
@@ -737,7 +802,8 @@ if ($result0t->num_rows > 0) {
             clearInterval(myVar);
             clearInterval(mydur);
         }
-
+    </script>
+    <script>
         function jog(n1, n2) {
             return n1 + n2;
         }
@@ -760,4 +826,24 @@ if ($result0t->num_rows > 0) {
         clearInterval(myVar);
         clearInterval(mydur);
         addcalc();
+    </script>
+
+
+    <script>
+        function numtotime(dur) {
+            if (dur > 0) {
+                var h, m, s;
+                h = 0; m = 0; s = 1;
+                h = parseInt(dur / 3600);
+                h = h.toString().padStart(2, '0');
+                m = parseInt((dur - (h * 3600)) / 60);
+                m = m.toString().padStart(2, '0');
+                s = ((dur - (h * 3600)) % 60);
+                s = s.toString().padStart(2, '0');
+                return h + ':' + m + ':' + s;
+            } else {
+                var secc = document.getElementById("seccx").innerHTML;
+                return secc;
+            }
+        }
     </script>
