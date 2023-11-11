@@ -96,10 +96,10 @@ if($done == 1){
 }
 $pts = $corr * $perpoint;
 
-$query333 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, rank, perc, points, revision, accept, done, rev100) 
+$query333 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
             VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$pts', '$rev', '$accept', '$done' , NULL)";
 $conn->query($query333);
-
+echo $query333;
 
 
 if($perc == 100){
@@ -118,7 +118,7 @@ if($perc == 100){
         $point = 500;
     }
 
-    $query3334 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, rank, perc, points, revision, accept, done, rev100) 
+    $query3334 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
     VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$point', '$rev', '$accept', '$done' , '$rev100' )";
 $conn->query($query3334);
 
