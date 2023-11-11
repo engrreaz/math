@@ -307,6 +307,7 @@ if ($result0t->num_rows > 0) {
                 }
                 ?>
             </div>
+            <div id="wid" style="width:100%;">fffdddddddddd</div>
 
 
             <div style="display:none; text-align:center;">
@@ -348,6 +349,10 @@ if ($result0t->num_rows > 0) {
                 <button class="btn btn-danger" onclick="repeal();">Repeal</button>
             </div>
         </div>
+
+
+
+
     </div>
     <div id="repo" style="display:none;">
 
@@ -423,7 +428,7 @@ if ($result0t->num_rows > 0) {
                             height: 50px;
                             width: 50px;
                             border-radius: 50%;
-                            
+
                             margin: 0 20px;
                             font-size: 20px;
                             text-align: center;
@@ -538,7 +543,7 @@ if ($result0t->num_rows > 0) {
 
                             <tr>
                                 <td colspan="3">
-                                    <div style="display:flex; justify-content:space-evenly; text-align:center;">
+                                    <div style="display:flex; justify-content:space-evenly; text-align:center; margin: 0 50px;">
                                         <div class="gol q">
                                             <div id="ttt">
                                                 <?php echo $quecnt; ?>
@@ -679,6 +684,8 @@ if ($result0t->num_rows > 0) {
                 } else {
                     document.getElementById("done-icon").innerHTML = '<i class="bi bi-check2-circle"></i>';
                     document.getElementById("done-msg").innerHTML = "You're all done";
+                    document.getElementById("layerblock").style.background = "var(--lighter)  ";
+                    document.getElementById("done-msg").style.color = "seagreen ";
                     gamedone = 1;
                     done();
                 }
@@ -701,6 +708,8 @@ if ($result0t->num_rows > 0) {
             if ((ppp <= 0 || dursec <= 0.0) && <?php echo $dur; ?> > 0) {
                 document.getElementById("done-icon").innerHTML = '<i class="bi bi-stopwatch"></i>';
                 document.getElementById("done-msg").innerHTML = "Oppps! Time up";
+                document.getElementById("layerblock").style.background = "#e6e6fa  ";
+                document.getElementById("done-msg").style.color = "#9400d3 ";
                 gamedone = 3;
                 done();
             }
@@ -737,6 +746,8 @@ if ($result0t->num_rows > 0) {
 
             document.getElementById("done-icon").innerHTML = '<i style="color:red;" class="bi bi-x-circle-fill"></i>';
             document.getElementById("done-msg").innerHTML = "You've repeal this test.";
+            document.getElementById("layerblock").style.background = "#ffeeee ";
+            document.getElementById("done-msg").style.color = "red";
             gemedone = 2;
 
             done();
@@ -854,4 +865,7 @@ if ($result0t->num_rows > 0) {
                 return secc;
             }
         }
+
+        const box = document.getElementById("wid");
+        box.innerHTML = box.clientWidth ;
     </script>
