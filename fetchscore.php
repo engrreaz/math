@@ -99,7 +99,7 @@ $pts = $corr * $perpoint;
 $query333 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
             VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$pts', '$rev', '$accept', '$done' , NULL)";
 $conn->query($query333);
-echo $query333;
+// echo $query333;
 
 
 if($perc == 100){

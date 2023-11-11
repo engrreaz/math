@@ -787,7 +787,7 @@ if ($result0t->num_rows > 0) {
                     } else {
                         document.getElementById("rank").innerHTML = rank;
                     }
-                    // $("#score").html("");
+                    $("#score").html("");
                 }
             });
         }
