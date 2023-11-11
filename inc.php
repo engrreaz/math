@@ -65,7 +65,7 @@ if ($result0->num_rows > 0) {
         $userlevel = $row0["userlevel"];
         $userid = $row0["userid"];
         $pth = $row0["photourl"];
-        $curexam = $row0["curexam"];
+        $points = $row0["points"];
         $otp = $row0["otp"];
         $otptime = $row0["otptime"];
     }
@@ -74,8 +74,9 @@ if ($result0->num_rows > 0) {
     //echo $query33p;
     $conn->query($query33p);
     $sccode = 0;
-    $userlevel = 'Guest';
+    $userlevel = 'Visitor';
 }
+
 
 
 if (isset($_GET['fn'])) {
@@ -105,7 +106,13 @@ if ($l < 5) {
 //   $conn->query($query33pd) ;
 
 
-
+$sql0r = "SELECT sum(points) as ptt FROM leaderboard where email='$usr'";
+$result0rx = $conn->query($sql0r);
+if ($result0rx->num_rows > 0) {
+    while ($row0r = $result0rx->fetch_assoc()) {
+        $totalpoints = $row0r["ptt"];
+    }
+} 
 
 
 

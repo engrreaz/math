@@ -101,7 +101,7 @@ if ($result0t->num_rows > 0) {
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 100vh;
+        height: calc(100vh-53px);
         justify-content: center;
         align-items: center;
     }
@@ -109,8 +109,6 @@ if ($result0t->num_rows > 0) {
 
 <body style="background: var(--lighter); width:100%; max-width:100%; overflow:auto;">
     <div class="containerx" style="width: 100%;">
-
-
         <div id="opening-block" class="opening-block" style="text-align: center; margin: 5px 0; ">
 
             <div class="top-icon"><i class="bi bi-plus-circle-fill"></i></div>
@@ -343,7 +341,7 @@ if ($result0t->num_rows > 0) {
                 </div>
             </div>
             <div class="result">
-                <input type="number" id="res" class="result-value" onkeyup="submit();" />
+                <input type="number" id="res" class="result-value" onkeyup="submit();" autofocus />
             </div>
 
             <div style="padding:25px 0 50px;">
@@ -425,7 +423,7 @@ if ($result0t->num_rows > 0) {
                             height: 50px;
                             width: 50px;
                             border-radius: 50%;
-                            border: 2px solid var(--dark);
+                            
                             margin: 0 20px;
                             font-size: 20px;
                             text-align: center;
@@ -447,19 +445,23 @@ if ($result0t->num_rows > 0) {
                         }
 
                         .q {
-                            color: var(--dark);
+                            color: black;
+                            border: 2px solid black;
                         }
 
                         .a {
-                            color: olive;
+                            color: purple;
+                            border: 2px solid purple;
                         }
 
                         .r {
-                            color: green;
+                            color: seagreen;
+                            border: 2px solid seagreen;
                         }
 
                         .w {
-                            color: red
+                            color: red;
+                            border: 2px solid red;
                         }
 
                         #board {
@@ -491,6 +493,15 @@ if ($result0t->num_rows > 0) {
                             font-style: italic;
                         }
                     </style>
+
+                    <div id="score" style="display:block; font-size:8px;">
+                        <div id="best2"></div>
+                        <div id="rank2"></div>
+                        <div id="champ2"></div>
+                    </div>
+
+
+
                     <div style="display:block;">
                         <table style="border:0px solid gray; ">
                             <tr>
@@ -526,13 +537,12 @@ if ($result0t->num_rows > 0) {
                             </tr>
 
                             <tr>
-
                                 <td colspan="3">
                                     <div style="display:flex; justify-content:space-evenly; text-align:center;">
                                         <div class="gol q">
                                             <div id="ttt">
                                                 <?php echo $quecnt; ?>
-                                            </div><span class="goo">Question</span>
+                                            </div><span class="goo">Ques</span>
                                         </div>
                                         <div class="gol a">
                                             <div id="count">0</div><span class="goo">Answer</span>
@@ -562,11 +572,7 @@ if ($result0t->num_rows > 0) {
 
         </div>
 
-        <div id="score" style="display:block;">
-            <div id="best2"></div>
-            <div id="rank2"></div>
-            <div id="champ2"></div>
-        </div>
+
 
 
     </div>
@@ -645,9 +651,9 @@ if ($result0t->num_rows > 0) {
             document.getElementById("fol").innerHTML = res;
             var digit = res.toString().length;
             document.getElementById("digit").innerHTML = digit;
+            document.getElementById("res").focus();
             document.getElementById("res").value = '';
             document.getElementById("res").disabled = false;
-            document.getElementById("res").focus();
             redur();
         }
     </script>
@@ -703,7 +709,9 @@ if ($result0t->num_rows > 0) {
     </script>
     <script>
         function redur() {
+            document.getElementById("res").focus();
             document.getElementById("secdur").innerHTML = "<?php echo $dur . '.0'; ?>";
+            setTimeout(function () { document.getElementById("res").focus(); }, 100);
         }
     </script>
     <script>
@@ -765,7 +773,7 @@ if ($result0t->num_rows > 0) {
                 data: infor,
                 cache: false,
                 beforeSend: function () {
-                    $('#score').html('<span class="">Saving, Please Wait....</span>');
+                    $('#score').html('<span style="font-size:16px;" class=""><i class="bi bi-display-fill"></i>');
                 },
                 success: function (html) {
                     $("#score").html(html);
@@ -777,7 +785,7 @@ if ($result0t->num_rows > 0) {
                     if (isNaN(rank)) {
                         document.getElementById("rank").innerHTML = '-';
                     } else {
-                        document.getElementById("rank").innerHTML = rank ;
+                        document.getElementById("rank").innerHTML = rank;
                     }
                     $("#score").html("");
                 }
