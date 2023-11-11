@@ -46,7 +46,7 @@ if ($result0rc->num_rows > 0) {
 } else {
     $champ = 0;
 }
-
+  
 $sql0r = "SELECT count(*) as cnt FROM leaderboard where gameid='$id' and duration <= '$dur' and perc = 100";
 $result0rr = $conn->query($sql0r);
 if ($result0rr->num_rows > 0) {
