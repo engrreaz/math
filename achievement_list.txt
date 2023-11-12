@@ -1,0 +1,33 @@
+
+
+on registration     500
+100% accept ->
+    1   200
+    5   500
+    10  1000
+    20  5000
+    50  10000
+    100 25000
+    200 50000
+same molule indivisual level 100% 5 level = 1000
+                                10 level =2500
+refference......
+
+
+
+
+
+
+
+
+daily point     100
+continue 7 day  500
+30 days         1000
+
+daily puzzle 100
+
+on every level for RANKing 1 (one time for a level) = 1000
+1 ranking 3000
+5 RANKing  10000
+10 ranking  25000
+20          50000

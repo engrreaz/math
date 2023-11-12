@@ -307,7 +307,7 @@ if ($result0t->num_rows > 0) {
                 }
                 ?>
             </div>
-            <div id="wid" style="width:100%;">fffdddddddddd</div>
+            <div id="wid" style="display:none;">0-0</div>
 
 
             <div style="display:none; text-align:center;">
@@ -543,7 +543,8 @@ if ($result0t->num_rows > 0) {
 
                             <tr>
                                 <td colspan="3">
-                                    <div style="display:flex; justify-content:space-evenly; text-align:center; margin: 0 50px;">
+                                    <div
+                                        style="display:flex; justify-content:space-evenly; text-align:center; margin: 0 50px;">
                                         <div class="gol q">
                                             <div id="ttt">
                                                 <?php echo $quecnt; ?>
@@ -867,5 +868,24 @@ if ($result0t->num_rows > 0) {
         }
 
         const box = document.getElementById("wid");
-        box.innerHTML = box.clientWidth ;
+        var wid = screen.width;;
+
+        var qc = <?php echo $quecnt; ?>;
+        var dotsize = parseInt((wid * 0.8) / qc);
+        var marg = parseInt(dotsize / 5);
+        dotsize = dotsize - 2 * marg;
+
+        if(dotsize>10){dotsize = 10;}
+        if(marg>2){marg = 2;}
+        box.innerHTML = wid + '--' + dotsize + '--' + marg;
+        setTimeout(() => {
+            var jj;
+            for (jj = 0; jj < qc; jj++) {
+                document.getElementById("dot"+jj).style.height = dotsize + "px";
+                document.getElementById("dot"+jj).style.width = dotsize + "px";
+                document.getElementById("dot"+jj).style.margin = marg + "px";
+            }
+
+        }, 100);
+
     </script>
