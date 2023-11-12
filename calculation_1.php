@@ -111,16 +111,7 @@ if ($result0t->num_rows > 0) {
     <div class="containerx" style="width: 100%;">
         <div id="opening-block" class="opening-block" style="text-align: center; margin: 5px 0; ">
 
-            <div class="top-icon"><i class="bi bi-plus-circle-fill"></i></div>
-            <div class="top-text">
-                <?php echo $title; ?>
-                <span class="top-text-descrip">
-                    <?php echo $descrip; ?>
-                </span>
-                <span class="top-text-level">
-                    <?php echo $level; ?>
-                </span>
-            </div>
+            <?php include 'top-block.php'; ?>
 
             <style>
                 .rules {
@@ -171,17 +162,8 @@ if ($result0t->num_rows > 0) {
 
 
         <div id="main-block" style="text-align: center; margin: 25px 0; display:none;">
-            <div class="top-icon"><i class="bi bi-plus-circle-fill"></i></div>
-            <div class="top-text">
-                <?php echo $title; ?>
-                <span class="top-text-descrip">
-                    <?php echo $descrip; ?>
-                </span>
-                <span class="top-text-level">
-                    <?php echo $level; ?>
-                </span>
-            </div>
 
+            <?php include 'top-block.php'; ?>
 
 
 
@@ -359,7 +341,8 @@ if ($result0t->num_rows > 0) {
     </div>
 
     <style>
-        #layerblock {
+        #layerblock,
+        #leaderboard {
             background: var(--lighter);
             text-align: center;
             width: 100%;
@@ -527,7 +510,7 @@ if ($result0t->num_rows > 0) {
                                             <br><span id="best">00:00:17</span><br>Your Best
                                         </div>
                                         <div style="text-align:center;">
-                                            <i class="bi bi-award " style=" font-size:60px;"></i><br>Rank
+                                            <i class="bi bi-award " style=" font-size:60px;"></i><br>Rank (This Session)
                                             <div id="rank"
                                                 style="position:relative; text-align: center; top: -61px; font-size:15px;">
                                                 738
@@ -577,13 +560,17 @@ if ($result0t->num_rows > 0) {
             </div>
 
         </div>
-
-
-
-
     </div>
 
+    <div id="leaderboard">
+        <?php include 'top-block.php'; ?>
 
+        <div id="leaderlist">
+
+        </div>
+        <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
+
+    </div>
 
 
     <script>
@@ -807,7 +794,34 @@ if ($result0t->num_rows > 0) {
     <script>
 
         function leaderboard() {
+            document.getElementById("leaderboard").style.display = 'block';
+            let id = <?php echo $id; ?>;
+            var infor = "id=" + id;
+            $("#leaderlist").html("");
 
+            $.ajax({
+                type: "POST",
+                url: "fetchleader.php",
+                data: infor,
+                cache: false,
+                beforeSend: function () {
+                    $('#leaderlist').html('<span style="font-size:16px;" class=""><i class="bi bi-display-fill"></i>');
+                },
+                success: function (html) {
+                    $("#leaderlist").html(html);
+                    var best = parseInt(document.getElementById("best2").innerHTML);
+                    var champ = parseInt(document.getElementById("champ2").innerHTML);
+                    var rank = parseInt(document.getElementById("rank2").innerHTML);
+                    document.getElementById("best").innerHTML = numtotime(best);
+                    document.getElementById("champ").innerHTML = numtotime(champ);
+                    if (isNaN(rank)) {
+                        document.getElementById("rank").innerHTML = '-';
+                    } else {
+                        document.getElementById("rank").innerHTML = rank;
+                    }
+                    //$("#score").html("");
+                }
+            });
         }
 
         function history() {
@@ -818,6 +832,7 @@ if ($result0t->num_rows > 0) {
         function closet() {
             document.getElementById("layerblock").style.display = 'none';
             document.getElementById("main-block").style.display = 'none';
+            document.getElementById("leaderboard").style.display = 'none';
             document.getElementById("opening-block").style.display = 'flex';
             clearInterval(myVar);
             clearInterval(mydur);
@@ -875,15 +890,15 @@ if ($result0t->num_rows > 0) {
         var marg = parseInt(dotsize / 5);
         dotsize = dotsize - 2 * marg;
 
-        if(dotsize>10){dotsize = 10;}
-        if(marg>2){marg = 2;}
+        if (dotsize > 10) { dotsize = 10; }
+        if (marg > 2) { marg = 2; }
         box.innerHTML = wid + '--' + dotsize + '--' + marg;
         setTimeout(() => {
             var jj;
             for (jj = 0; jj < qc; jj++) {
-                document.getElementById("dot"+jj).style.height = dotsize + "px";
-                document.getElementById("dot"+jj).style.width = dotsize + "px";
-                document.getElementById("dot"+jj).style.margin = marg + "px";
+                document.getElementById("dot" + jj).style.height = dotsize + "px";
+                document.getElementById("dot" + jj).style.width = dotsize + "px";
+                document.getElementById("dot" + jj).style.margin = marg + "px";
             }
 
         }, 100);
