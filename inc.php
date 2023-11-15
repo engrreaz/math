@@ -11,6 +11,8 @@ $curpage = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1
 // $url.= $_SERVER['REQUEST_URI'];    
 
 // echo $browser;
+$imgver = '1';
+
 if ($browser != '') {
     // redirect to error page.
 }
@@ -75,6 +77,13 @@ if ($result0->num_rows > 0) {
     $conn->query($query33p);
     $sccode = 0;
     $userlevel = 'Visitor';
+
+    $query33pd = "insert into leaderboard (id, module, email, date, datetime, points, achievement, achievementid, achievepoint, achievetext, achieveicon ) 
+                values (NULL, 'Registration', '$usr', '$td', '$cur', '$0', '1' ,'1', '500', 'Registration', '')";
+    $conn->query($query33pd);
+
+    $query33pf = "UPDATE achievements set users = users + 1 where id = 1;";
+    $conn->query($query33pf);
 }
 
 

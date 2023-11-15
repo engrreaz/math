@@ -43,6 +43,7 @@ include 'inc.php';
 
 
         <a href="module.php?email=engrreaz@gmail.com" class="btn">Puzzle</a>
+        <a href="achievement.php" class="btn">achievement</a>
 
 
     </div>

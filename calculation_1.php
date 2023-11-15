@@ -37,7 +37,6 @@ if ($result0t->num_rows > 0) {
 
 ?>
 
-
 <style>
     .box {
         padding: 10px 25px;
@@ -105,6 +104,235 @@ if ($result0t->num_rows > 0) {
         justify-content: center;
         align-items: center;
     }
+
+
+
+    .rules {
+        text-align: left;
+        font-size: 12px;
+    }
+
+    .ss {
+        text-align: center;
+        position: relative;
+    }
+
+    .ss-img {
+        width: 70%;
+        margin: 0 auto;
+        border: 1px solid gray;
+        border-radius: 4px;
+    }
+
+    .play {
+        position: absolute;
+        right: 20%;
+        top: 5%;
+        font-size: 30px;
+        color: white;
+    }
+
+    .ques-box {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ques {
+        font-size: 24px;
+        color: var(--darker);
+        border: 0px solid var(--darker);
+        background: var(--lighter);
+        padding: 8px 15px;
+        font-weight: bold;
+    }
+
+    .oper {
+        font-size: 24px;
+        color: var(--darker);
+        border: 0x solid var(--darker);
+        background: var(--lighter);
+        padding: 8px 15px;
+        font-weight: bold;
+    }
+
+    .result {}
+
+    .result-value {
+        font-size: 24px;
+        color: var(--darker);
+        border: 0px solid var(--darker);
+        background: var(--lighter);
+        padding: 8px 15px;
+        font-weight: bold;
+        text-align: center;
+
+    }
+
+    .result-value:focus {
+        border: 0px solid var(--darker);
+        outline: 0;
+    }
+
+    .dot-box {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: 15px auto;
+    }
+
+    .dot {
+        height: 10px;
+        width: 10px;
+        margin: 2px;
+        border-radius: 50%;
+        background: var(--light);
+    }
+
+    .ok {
+        background: var(--darker);
+    }
+
+    .no {
+        background: red;
+    }
+
+    .secs {
+        text-align: center;
+        font-size: 15px;
+        letter-spacing: 2px;
+        ;
+    }
+
+    #layerblock,
+    #leaderboard,
+    #historyblock {
+        background: var(--lighter);
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inner-block {}
+
+    td {
+        font-size: 13px;
+        border: 1px;
+    }
+
+    .rt {
+        text-align: right;
+        width: 47%;
+    }
+
+    .cln {
+        padding: 0 5px;
+        width: 5%;
+    }
+
+    .val {
+        text-align: center;
+    }
+
+    #done-icon {
+        font-size: 48px;
+        color: var(--darker);
+        margin: 0 0 10px 0;
+    }
+
+    #done-msg {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--dark);
+    }
+
+    #gap,
+    #gap2 {
+        height: 30px;
+    }
+
+    .gol {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+
+        margin: 0 20px;
+        font-size: 20px;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+        color: var(--darker);
+        line-height: 24px;
+    }
+
+    .goo {
+        font-size: 10px;
+        display: block;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        top: -10px;
+        font-weight: 400;
+
+    }
+
+    .q {
+        color: black;
+        border: 2px solid black;
+    }
+
+    .a {
+        color: purple;
+        border: 2px solid purple;
+    }
+
+    .r {
+        color: seagreen;
+        border: 2px solid seagreen;
+    }
+
+    .w {
+        color: red;
+        border: 2px solid red;
+    }
+
+    #board {
+        font-size: 10px;
+        color: var(--darker);
+    }
+
+    #board span {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    #board .bi {
+        font-size: 30px;
+    }
+
+    .big {
+        font-size: 60px;
+    }
+
+    .pp {
+        padding: 10px;
+        font-size: 24px;
+        margin: 0 10px;
+    }
+
+    .smm {
+        font-size: 10px;
+        font-style: italic;
+    }
 </style>
 
 <body style="background: var(--lighter); width:100%; max-width:100%; overflow:auto;">
@@ -113,32 +341,7 @@ if ($result0t->num_rows > 0) {
 
             <?php include 'top-block.php'; ?>
 
-            <style>
-                .rules {
-                    text-align: left;
-                    font-size: 12px;
-                }
 
-                .ss {
-                    text-align: center;
-                    position: relative;
-                }
-
-                .ss-img {
-                    width: 70%;
-                    margin: 0 auto;
-                    border: 1px solid gray;
-                    border-radius: 4px;
-                }
-
-                .play {
-                    position: absolute;
-                    right: 20%;
-                    top: 5%;
-                    font-size: 30px;
-                    color: white;
-                }
-            </style>
             <div class="rules">
                 <ul>
                     <li>This test contain 5 calculations between 2 numbers.</li>
@@ -152,11 +355,14 @@ if ($result0t->num_rows > 0) {
             </div>
 
             <div style="padding:25px 0 50px;">
-                <button class="btn btn-success pp" onclick="testagain();"><i
+                <button class="btn btn-success pp" style="padding:10px; font-size:24px;" onclick="testagain();"><i
                         class="bi bi-caret-right-fill"></i></button>
-                <button class="btn btn-info pp" onclick="leaderboard();"><i class="bi bi-award"></i></button>
-                <button class="btn btn-warning pp" onclick="history();"><i class="bi bi-smartwatch"></i></button>
-                <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
+                <button class="btn btn-info pp" style="padding:10px; font-size:24px;" onclick="leaderboard();"><i
+                        class="bi bi-award"></i></button>
+                <button class="btn btn-warning pp" style="padding:10px; font-size:24px;" onclick="history();"><i
+                        class="bi bi-smartwatch"></i></button>
+                <button class="btn btn-danger pp" style="padding:10px; font-size:24px;" onclick="closet();"><i
+                        class="bi bi-x-circle"></i></button>
             </div>
         </div>
 
@@ -188,81 +394,7 @@ if ($result0t->num_rows > 0) {
                 </div>
             </div>
 
-            <style>
-                .ques-box {
-                    display: flex;
-                    text-align: center;
-                    justify-content: center;
-                    align-items: center;
-                }
 
-                .ques {
-                    font-size: 24px;
-                    color: var(--darker);
-                    border: 0px solid var(--darker);
-                    background: var(--lighter);
-                    padding: 8px 15px;
-                    font-weight: bold;
-                }
-
-                .oper {
-                    font-size: 24px;
-                    color: var(--darker);
-                    border: 0x solid var(--darker);
-                    background: var(--lighter);
-                    padding: 8px 15px;
-                    font-weight: bold;
-                }
-
-                .result {}
-
-                .result-value {
-                    font-size: 24px;
-                    color: var(--darker);
-                    border: 0px solid var(--darker);
-                    background: var(--lighter);
-                    padding: 8px 15px;
-                    font-weight: bold;
-                    text-align: center;
-
-                }
-
-                .result-value:focus {
-                    border: 0px solid var(--darker);
-                    outline: 0;
-                }
-
-                .dot-box {
-                    display: flex;
-                    text-align: center;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 15px auto;
-                }
-
-                .dot {
-                    height: 10px;
-                    width: 10px;
-                    margin: 2px;
-                    border-radius: 50%;
-                    background: var(--light);
-                }
-
-                .ok {
-                    background: var(--darker);
-                }
-
-                .no {
-                    background: red;
-                }
-
-                .secs {
-                    text-align: center;
-                    font-size: 15px;
-                    letter-spacing: 2px;
-                    ;
-                }
-            </style>
 
             <div>
 
@@ -340,59 +472,7 @@ if ($result0t->num_rows > 0) {
 
     </div>
 
-    <style>
-        #layerblock,
-        #leaderboard {
-            background: var(--lighter);
-            text-align: center;
-            width: 100%;
-            height: 100vh;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
 
-        .inner-block {}
-
-        td {
-            font-size: 13px;
-            border: 1px;
-        }
-
-        .rt {
-            text-align: right;
-            width: 47%;
-        }
-
-        .cln {
-            padding: 0 5px;
-            width: 5%;
-        }
-
-        .val {
-            text-align: center;
-        }
-
-        #done-icon {
-            font-size: 48px;
-            color: var(--darker);
-            margin: 0 0 10px 0;
-        }
-
-        #done-msg {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        #gap,
-        #gap2 {
-            height: 30px;
-        }
-    </style>
 
     <div id="layerblock">
         <div class="inner-block">
@@ -403,84 +483,6 @@ if ($result0t->num_rows > 0) {
             <div id="gap2"></div>
             <div id="report">
                 <div style="">
-
-
-
-                    <style>
-                        .gol {
-                            height: 50px;
-                            width: 50px;
-                            border-radius: 50%;
-
-                            margin: 0 20px;
-                            font-size: 20px;
-                            text-align: center;
-                            padding: 5px;
-                            font-weight: bold;
-                            color: var(--darker);
-                            line-height: 24px;
-                        }
-
-                        .goo {
-                            font-size: 10px;
-                            display: block;
-                            margin: 0;
-                            padding: 0;
-                            position: relative;
-                            top: -10px;
-                            font-weight: 400;
-
-                        }
-
-                        .q {
-                            color: black;
-                            border: 2px solid black;
-                        }
-
-                        .a {
-                            color: purple;
-                            border: 2px solid purple;
-                        }
-
-                        .r {
-                            color: seagreen;
-                            border: 2px solid seagreen;
-                        }
-
-                        .w {
-                            color: red;
-                            border: 2px solid red;
-                        }
-
-                        #board {
-                            font-size: 10px;
-                            color: var(--darker);
-                        }
-
-                        #board span {
-                            font-size: 14px;
-                            font-weight: 600;
-                        }
-
-                        #board .bi {
-                            font-size: 30px;
-                        }
-
-                        .big {
-                            font-size: 60px;
-                        }
-
-                        .pp {
-                            padding: 10px;
-                            font-size: 24px;
-                            margin: 0 10px;
-                        }
-
-                        .smm {
-                            font-size: 10px;
-                            font-style: italic;
-                        }
-                    </style>
 
                     <div id="score" style="display:block; font-size:8px;">
                         <div id="best2"></div>
@@ -551,12 +553,15 @@ if ($result0t->num_rows > 0) {
                 </div>
             </div>
 
-            <div style="padding:25px 0 50px;">
-                <button class="btn btn-success pp" onclick="testagain();"><i
+            <div style="padding:25px 0 50px;">mental
+                <button class="btn btn-success pp" style="padding:10px; font-size:24px;" onclick="testagain();"><i
                         class="bi bi-caret-right-fill"></i></button>
-                <button class="btn btn-info pp" onclick="leaderboard();"><i class="bi bi-award"></i></button>
-                <button class="btn btn-warning pp" onclick="history();"><i class="bi bi-smartwatch"></i></button>
-                <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
+                <button class="btn btn-info pp" style="padding:10px; font-size:24px;" onclick="leaderboard();"><i
+                        class="bi bi-award"></i></button>
+                <button class="btn btn-warning pp" style="padding:10px; font-size:24px;" onclick="history();"><i
+                        class="bi bi-smartwatch"></i></button>
+                <button class="btn btn-danger pp" style="padding:10px; font-size:24px;" onclick="closet();"><i
+                        class="bi bi-x-circle"></i></button>
             </div>
 
         </div>
@@ -568,8 +573,20 @@ if ($result0t->num_rows > 0) {
         <div id="leaderlist">
 
         </div>
-        <button class="btn btn-danger pp" onclick="closet();"><i class="bi bi-x-circle"></i></button>
+        <button class="btn btn-danger pp" style="padding:10px; font-size:24px;" onclick="closet();"><i
+                class="bi bi-x-circle"></i></button>
 
+    </div>
+
+    <div id="historyblock">
+        <?php include 'top-block.php'; ?>
+
+        <div id="historylist">
+
+        </div>
+        <button class="btn btn-danger pp" style="padding:10px; font-size:24px;" onclick="closet();"><i
+                class="bi bi-x-circle"></i></button>
+        <div style="height:60px;"></div>
     </div>
 
 
@@ -763,7 +780,7 @@ if ($result0t->num_rows > 0) {
             var ans = corr + wrong;;
 
 
-            var infor = "id=" + id + "&dur=" + dur + "&que=" + ques + "&ans=" + ans + "&corr=" + corr + "&wrong=" + wrong + "&gamedone=" + gamedone;
+            var infor = "id=" + id + "&dur=" + dur + "&que=" + ques + "&ans=" + ans + "&corr=" + corr + "&wrong=" + wrong + "&gamedone=" + gamedone + "&module=<?php echo $module;?>" ;
             $("#score").html("");
 
             $.ajax({
@@ -809,23 +826,33 @@ if ($result0t->num_rows > 0) {
                 },
                 success: function (html) {
                     $("#leaderlist").html(html);
-                    var best = parseInt(document.getElementById("best2").innerHTML);
-                    var champ = parseInt(document.getElementById("champ2").innerHTML);
-                    var rank = parseInt(document.getElementById("rank2").innerHTML);
-                    document.getElementById("best").innerHTML = numtotime(best);
-                    document.getElementById("champ").innerHTML = numtotime(champ);
-                    if (isNaN(rank)) {
-                        document.getElementById("rank").innerHTML = '-';
-                    } else {
-                        document.getElementById("rank").innerHTML = rank;
-                    }
-                    //$("#score").html("");
                 }
             });
         }
 
         function history() {
+            document.getElementById("historyblock").style.display = 'block';
+            let id = <?php echo $id; ?>;
+            var infor = "id=" + id;
+            $("#historylist").html("");
 
+            $.ajax({
+                type: "POST",
+                url: "fetchhistory.php",
+                data: infor,
+                cache: false,
+                beforeSend: function () {
+                    $('#historylist').html('<span style="font-size:16px;" class=""><i class="bi bi-display-fill"></i>');
+                },
+                success: function (html) {
+                    $("#historylist").html(html);
+                    var x = parseInt(document.getElementById('slcnt').innerHTML);
+                    //alert(x + 100);
+                    for (var y = 0; y < x; y++) {
+                        document.getElementById("sld" + y).innerHTML = x - y;
+                    }
+                }
+            });
         }
     </script>
     <script>
@@ -833,6 +860,7 @@ if ($result0t->num_rows > 0) {
             document.getElementById("layerblock").style.display = 'none';
             document.getElementById("main-block").style.display = 'none';
             document.getElementById("leaderboard").style.display = 'none';
+            document.getElementById("historyblock").style.display = 'none';
             document.getElementById("opening-block").style.display = 'flex';
             clearInterval(myVar);
             clearInterval(mydur);

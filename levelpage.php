@@ -42,6 +42,17 @@ $module = $_GET['module'];
                     $module = $row0["module"];
                     $level = $row0["level"];
                     $link = $row0["link"];
+                    $test = $row0["testcount"];
+                    $user = $row0["usercount"];
+
+
+                    $sql0 = "SELECT count(*) as ccc FROM leaderboard where module = '$module' and email='$usr' and gameid='$id' and done=1";
+                    $result0ts = $conn->query($sql0);
+                    if ($result0ts->num_rows > 0) {
+                        while ($row0 = $result0ts->fetch_assoc()) {
+                            $mycomp = $row0["ccc"];
+                        }
+                    }
                     ?>
                     <!-- Box Icon -->
                     <div class="box" style="display: flex; width:100%;" onclick="opent('<?php echo $link; ?>', <?php echo $id;?>);">
@@ -55,7 +66,10 @@ $module = $_GET['module'];
                                 <?php echo $descrip; ?>
                             </div>
                             <div class="box-titlebn">
-                                <?php echo 'Total <b>1422</b> tests taken'; ?>
+                                <?php echo 'You have played <b>' . $mycomp . ' </b>time(s).' ?>
+                            </div>
+                            <div class="box-titlebn">
+                                <?php echo 'Total <b>' . $test . '</b> test(s) already taken by <b>' . $user . '</b> user(s)'; ?>
                             </div>
                         </div>
                         <div class="box-prog-right">

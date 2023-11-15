@@ -1,5 +1,4 @@
 
-
 on registration     500
 100% accept ->
     1   200

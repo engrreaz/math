@@ -10,6 +10,7 @@ $ans = $_POST['ans'];
 $corr = $_POST['corr'];
 $wro = $_POST['wrong'];
 $done = $_POST['gamedone'];
+$modd = $_POST['module'];
 
 $sql0r = "SELECT count(*) as koy FROM leaderboard where gameid='$id' and email = '$usr' and done = 1";
 $result0rx = $conn->query($sql0r);
@@ -96,11 +97,6 @@ if ($done == 1) {
 }
 $pts = $corr * $perpoint;
 
-$query333 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
-            VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$pts', '$rev', '$accept', '$done' , NULL)";
-$conn->query($query333);
-// echo $query333;
-
 
 if ($perc == 100) {
     $rev100 = $rev100 + 1;
@@ -118,11 +114,41 @@ if ($perc == 100) {
         $point = 500;
     }
 
-    $query3334 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
-    VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$point', '$rev', '$accept', '$done' , '$rev100' )";
-    $conn->query($query3334);
+    // $query3334 = "INSERT INTO leaderboard (id, gameid, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100) 
+    // VALUES (NULL, '$id', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$point', '$rev', '$accept', '$done' , '$rev100' )";
+    // $conn->query($query3334);
 
+    $ach = 1;
+    $achpoint = $point;
+    $achtext = 'Rev # ' . $rev100;
+    $achicon = '<i class="bi bi-fan"></i>';
+} else {
+    $ach = 0;
+    $achpoint = 0;
+    $achtext = '';
+    $achicon = '';
+    $rev100 = 0;
 }
+
+
+$query333 = "INSERT INTO leaderboard (id, gameid, module, email, date, datetime, duration, totalques, answer, correct, wrong, ranks, perc, points, revision, accept, done, rev100, achievement, achievepoint, achievetext, achieveicon ) 
+            VALUES (NULL, '$id', '$modd', '$usr', '$dt', '$cur', '$dur', '$que', '$ans', '$corr', '$wro', '$rank', '$perc', '$pts', '$rev', '$accept', '$done' , '$rev100', '$ach', '$achpoint', '$achtext', '$achicon')";
+$conn->query($query333);
+// echo $query333;
+
+if ($rev == 1) {
+    $query334 = "UPDATE modules set testcount = testcount + 1 , usercount = usercount + 1 where modulename = '$modd'";
+    $conn->query($query334);
+    $query335 = "UPDATE test set testcount = testcount + 1, participantcount = participantcount + 1 where module = '$modd' and id='$id'";
+    $conn->query($query335);
+} else {
+    $query334 = "UPDATE modules set testcount = testcount + 1 where modulename = '$modd'";
+    $conn->query($query334);
+    $query335 = "UPDATE test set testcount = testcount + 1 where module = '$modd' and id='$id'";
+    $conn->query($query335);
+}
+
+
 ?>
 
 <div id="best2">
